@@ -1,0 +1,60 @@
+﻿@page
+@model AS2_WEB.Pages.Partner.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Partner[0].PartnerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partner[0].AS2_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partner[0].X509_Alias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partner[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partner[0].LastCU_Time)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Partner) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartnerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AS2_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.X509_Alias)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastCU_Time)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Partner_ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Partner_ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Partner_ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
