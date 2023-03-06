@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AS2_WEB.Data;
 using AS2_WEB.Models;
 
-namespace AS2_WEB.Pages.Partner
+namespace AS2_WEB.Pages.Partners
 {
     public class IndexModel : PageModel
     {
@@ -19,17 +19,14 @@ namespace AS2_WEB.Pages.Partner
             _context = context;
         }
 
-        public IList<Models.Partner> Partner { get;set; } = default!;
-        public List<Models.Partnership> Partnerships { get; set; }
+        public IList<Partner> Partner { get;set; } = default!;
 
-public async Task<IActionResult> OnGetAsync()
-{
-            Partnerships = await _context.Partnership.ToListAsync();
-            ViewData["Tab"]= "Partners";
-    return Page();
-}
-
-
-       
+        public async Task OnGetAsync()
+        {
+            if (_context.Partner != null)
+            {
+                Partner = await _context.Partner.ToListAsync();
+            }
+        }
     }
 }

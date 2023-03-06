@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AS2_WEB.Data;
 using AS2_WEB.Models;
 
-namespace AS2_WEB.Pages.Partner
+namespace AS2_WEB.Pages.Partners
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace AS2_WEB.Pages.Partner
         }
 
         [BindProperty]
-        public Models.Partner Partner { get; set; } = default!;
+        public Partner Partner { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

@@ -15,7 +15,5 @@ namespace AS2_WEB.Data
         }
 
         public DbSet<AS2_WEB.Models.Partner> Partner { get; set; } = default!;
-
-        public DbSet<AS2_WEB.Models.Partnership> Partnership { get; set; } = default!;
     }
 }

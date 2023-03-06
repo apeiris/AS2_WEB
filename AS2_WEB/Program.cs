@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using AS2_WEB.Models;
 using AS2_WEB.Data;
 namespace AS2_WEB
 {
@@ -10,6 +11,8 @@ namespace AS2_WEB
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<AS2_WEBContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("AS2_WEBContext") ?? throw new InvalidOperationException("Connection string 'AS2_WEBContext' not found.")));
+           // builder.Services.AddDbContext<DbContext>(options =>
+           //     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection") ?? throw new InvalidOperationException("Connection string 'AS2_WEBContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddRazorPages();
@@ -32,6 +35,16 @@ namespace AS2_WEB
             app.UseAuthorization();
 
             app.MapRazorPages();
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path == "/")
+                {
+                    context.Response.Redirect("/Index");
+                    return;
+                }
+                await next();
+            });
+
 
             app.Run();
         }

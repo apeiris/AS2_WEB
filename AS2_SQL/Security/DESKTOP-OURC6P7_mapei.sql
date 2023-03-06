@@ -1,0 +1,2 @@
+﻿CREATE USER [DESKTOP-OURC6P7\mapei];
+
