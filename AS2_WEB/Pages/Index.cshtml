@@ -67,6 +67,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Partner ID</th>
                         <th>Partner Name</th>
                         <th>AS2 ID</th>
                         <th>X509 Alias</th>
@@ -87,9 +88,8 @@
                             <td>
                                 <!-- Add the links to edit and delete the partner -->
                                 @*<a class="table-link edit" href="/Partners/Edit/@partner.Partner_ID">Edit</a>*@
-                                <a class="table-link edit" href="@Url.Page("/Partners/Edit", new { id = partner.Partner_ID })">Edit</a>
-
-                                <a class="table-link delete" href="/partners/delete/@partner.Partner_ID">Delete</a>
+                                <a class="table-link edit" href="@Url.Page("/Partners/Edit"     ,new {id = partner.Partner_ID })">Edit</a>
+                                <a class="table-link delete" href="@Url.Page("Partners/Delete"  ,new {id =partner.Partner_ID  })"> Delete</a>
                             </td>
                         </tr>
                     }

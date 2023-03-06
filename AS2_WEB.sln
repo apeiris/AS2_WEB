@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AS2_WEB", "AS2_WEB\AS2_WEB.csproj", "{AC0351A1-5D89-4E1E-A00A-C58CA16BAF04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AS2_WEB", "AS2_WEB\AS2_WEB.csproj", "{AC0351A1-5D89-4E1E-A00A-C58CA16BAF04}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AS2_SQL", "AS2_SQL\AS2_SQL.sqlproj", "{F7476205-0351-4C18-BA80-2EAE2FD6E2D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EBA48876-760C-4C9D-865F-BE724849C4BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

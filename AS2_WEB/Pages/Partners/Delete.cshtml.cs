@@ -12,9 +12,9 @@ namespace AS2_WEB.Pages.Partners
 {
     public class DeleteModel : PageModel
     {
-        private readonly AS2_WEB.Data.AS2_WEBContext _context;
+        private readonly AS2_WEB.Data.AS2DBContext _context;
 
-        public DeleteModel(AS2_WEB.Data.AS2_WEBContext context)
+        public DeleteModel(AS2_WEB.Data.AS2DBContext context)
         {
             _context = context;
         }
@@ -24,12 +24,12 @@ namespace AS2_WEB.Pages.Partners
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Partner == null)
+            if (id == null || _context.Partners == null)
             {
                 return NotFound();
             }
 
-            var partner = await _context.Partner.FirstOrDefaultAsync(m => m.Partner_ID == id);
+            var partner = await _context.Partners.FirstOrDefaultAsync(m => m.Partner_ID == id);
 
             if (partner == null)
             {
@@ -44,20 +44,20 @@ namespace AS2_WEB.Pages.Partners
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Partner == null)
+            if (id == null || _context.Partners == null)
             {
                 return NotFound();
             }
-            var partner = await _context.Partner.FindAsync(id);
+            var partner = await _context.Partners.FindAsync(id);
 
             if (partner != null)
             {
                 Partner = partner;
-                _context.Partner.Remove(Partner);
+                _context.Partners.Remove(Partner);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
     }
 }

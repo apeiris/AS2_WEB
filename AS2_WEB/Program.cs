@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using AS2_WEB.Models;
-using AS2_WEB.Data;
+﻿using AS2_WEB.Data;
+using Microsoft.EntityFrameworkCore;
 namespace AS2_WEB
 {
     public class Program
@@ -9,11 +7,9 @@ namespace AS2_WEB
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<AS2_WEBContext>(options =>
+            builder.Services.AddDbContext<AS2DBContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("AS2_WEBContext") ?? throw new InvalidOperationException("Connection string 'AS2_WEBContext' not found.")));
-           // builder.Services.AddDbContext<DbContext>(options =>
-           //     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection") ?? throw new InvalidOperationException("Connection string 'AS2_WEBContext' not found.")));
-
+           
             // Add services to the container.
             builder.Services.AddRazorPages();
 

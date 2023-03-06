@@ -12,9 +12,9 @@ namespace AS2_WEB.Pages.Partners
 {
     public class CreateModel : PageModel
     {
-        private readonly AS2_WEB.Data.AS2_WEBContext _context;
+        private readonly AS2_WEB.Data.AS2DBContext _context;
 
-        public CreateModel(AS2_WEB.Data.AS2_WEBContext context)
+        public CreateModel(AS2_WEB.Data.AS2DBContext context)
         {
             _context = context;
         }
@@ -31,15 +31,15 @@ namespace AS2_WEB.Pages.Partners
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Partner == null || Partner == null)
+          if (!ModelState.IsValid || _context.Partners == null || Partner == null)
             {
                 return Page();
             }
 
-            _context.Partner.Add(Partner);
+            _context.Partners.Add(Partner);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
     }
 }

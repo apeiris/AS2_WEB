@@ -12,9 +12,9 @@ namespace AS2_WEB.Pages.Partners
 {
     public class IndexModel : PageModel
     {
-        private readonly AS2_WEB.Data.AS2_WEBContext _context;
+        private readonly AS2_WEB.Data.AS2DBContext _context;
 
-        public IndexModel(AS2_WEB.Data.AS2_WEBContext context)
+        public IndexModel(AS2_WEB.Data.AS2DBContext context)
         {
             _context = context;
         }
@@ -23,9 +23,9 @@ namespace AS2_WEB.Pages.Partners
 
         public async Task OnGetAsync()
         {
-            if (_context.Partner != null)
+            if (_context.Partners != null)
             {
-                Partner = await _context.Partner.ToListAsync();
+                Partner = await _context.Partners.ToListAsync();
             }
         }
     }

@@ -13,9 +13,9 @@ namespace AS2_WEB.Pages.Partners
 {
     public class EditModel : PageModel
     {
-        private readonly AS2_WEB.Data.AS2_WEBContext _context;
+        private readonly AS2_WEB.Data.AS2DBContext _context;
 
-        public EditModel(AS2_WEB.Data.AS2_WEBContext context)
+        public EditModel(AS2_WEB.Data.AS2DBContext context)
         {
             _context = context;
         }
@@ -25,12 +25,12 @@ namespace AS2_WEB.Pages.Partners
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Partner == null)
+            if (id == null || _context.Partners == null)
             {
                 return NotFound();
             }
 
-            var partner =  await _context.Partner.FirstOrDefaultAsync(m => m.Partner_ID == id);
+            var partner =  await _context.Partners.FirstOrDefaultAsync(m => m.Partner_ID == id);
             if (partner == null)
             {
                 return NotFound();
@@ -66,12 +66,12 @@ namespace AS2_WEB.Pages.Partners
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
 
         private bool PartnerExists(int id)
         {
-          return (_context.Partner?.Any(e => e.Partner_ID == id)).GetValueOrDefault();
+          return (_context.Partners?.Any(e => e.Partner_ID == id)).GetValueOrDefault();
         }
     }
 }
