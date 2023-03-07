@@ -1,0 +1,26 @@
+name: Send Email on Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  send-email:
+    runs-on: windows-11
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Send email
+        uses: mxschmitt/action-send-mail@v4
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Push event on main branch"
+          to: "mapeiris@hotmail.com"
+          from: "mapeiris@gmail.com"
+          body: "A push event has occurred on the main branch of the repository."
