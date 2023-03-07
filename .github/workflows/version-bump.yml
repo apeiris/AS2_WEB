@@ -1,0 +1,42 @@
+name: Version Bump
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Get version number
+        id: get-version
+        run: echo "::set-output name=version::$(dotnet --version)"
+
+      - name: Increment version number
+        id: increment-version
+        uses: dotnet/version@v2
+        with:
+          version: ${{ steps.get-version.outputs.version }}
+          part: build
+          variable: Version
+
+      - name: Update version number
+        run: sed -i "s/AssemblyVersion(\".*\")/AssemblyVersion(\"${{ env.Version }}\")/g" Properties/AssemblyInfo.cs
+
+      - name: Commit version number change
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Properties/AssemblyInfo.cs
+          git commit -m "Bump version to ${{ env.Version }}"
+          git push
