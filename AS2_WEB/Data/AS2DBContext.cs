@@ -10,21 +10,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace AS2_WEB.Data
 {
-    /*
-    public class AS2_WEBContext : DbContext
-    {
-        public AS2_WEBContext (DbContextOptions<AS2_WEBContext> options)
-            : base(options)
-        {
-        }
-
-        public DbSet<AS2_WEB.Models.Partner> Partner { get; set; } = default!;
-    }
-    */
     public class AS2DBContext : DbContext
     {
         private IConfiguration _config;
-        public DbSet<Partner> Partners { get; set; } = default;
+        public DbSet<Partner> Partners { get; set; } 
         public AS2DBContext(DbContextOptions<AS2DBContext> options) : base(options)
         {
         }
