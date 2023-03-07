@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   send-email:
     runs-on: windows-latest
