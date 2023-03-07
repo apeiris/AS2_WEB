@@ -7,20 +7,17 @@ on:
 
 jobs:
   send-email:
-    runs-on: windows-11
-
+    runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Send email
-        uses: mxschmitt/action-send-mail@v4
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "Push event on main branch"
-          to: "mapeiris@hotmail.com"
-          from: "mapeiris@gmail.com"
-          body: "A push event has occurred on the main branch of the repository."
+        env:
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+        run: |
+          curl --request POST \
+               --url https://api.sendgrid.com/v3/mail/send \
+               --header "Authorization: Bearer $SENDGRID_API_KEY" \
+               --header "Content-Type: application/json" \
+               --data '{"personalizations":[{"to":[{"email":"mapeiris@example.com"}]}],"from":{"email":"mapeiris@gmail.com"},"subject":"Test email","content":[{"type":"text/plain","value":"This is a test email."}]}'
