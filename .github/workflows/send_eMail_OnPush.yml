@@ -1,10 +1,9 @@
 name: Send Email on Push
 
-on:
+on: 
   push:
     branches:
       - main
-
 jobs:
   send-email:
     runs-on: windows-latest
@@ -16,8 +15,8 @@ jobs:
         env:
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
         run: |
-          curl --request POST \
-               --url https://api.sendgrid.com/v3/mail/send \
-               --header "Authorization: Bearer $SENDGRID_API_KEY" \
-               --header "Content-Type: application/json" \
-               --data '{"personalizations":[{"to":[{"email":"mapeiris@example.com"}]}],"from":{"email":"mapeiris@gmail.com"},"subject":"Test email","content":[{"type":"text/plain","value":"This is a test email."}]}'
+          curl -- request POST \
+               -- url https://api.sendgrid.com/v3/mail/send \
+               -- header "Authorization: Bearer $SENDGRID_API_KEY" \
+               -- header "Content-Type: application/json" \
+               -- data '{"personalizations":[{"to":[{"email":"mapeiris@example.com"}]}],"from":{"email":"mapeiris@gmail.com"},"subject":"Test email","content":[{"type":"text/plain","value":"This is a test email."}]}'
