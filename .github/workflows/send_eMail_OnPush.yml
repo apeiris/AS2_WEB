@@ -3,7 +3,7 @@ name: Send Email on Push
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   send-email:
