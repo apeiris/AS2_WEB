@@ -42,7 +42,13 @@ namespace AS2_WEB.Data
           modelBuilder.Entity<Partner>().Property(c => c.Partner_ID).HasColumnName("Partner_ID");
           modelBuilder.Entity<Partner>().Property(c => c.PartnerName).HasColumnName("PartnerName");
         }
-        public List<Partner> GetPartners(string city)
+        /// <summary>
+        /// The Sortby column accepts _ delimited suffix to indicate the sort order
+        /// i.e PartnerName_ASC or PartnerName_DESC 
+        /// </summary>
+        /// <param name="sortByColumn"></param>
+        /// <returns></returns>
+        public List<Partner> GetPartners(string sortByColumn)
         {
             var partners = new List<Partner>();
             using (var connection = new SqlConnection(_config.GetConnectionString("AS2_WEBContext")))
