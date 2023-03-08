@@ -40,6 +40,10 @@
             color: #eee;
         }
 
+    td {
+        white-space: nowrap;
+    }
+
 </style>
 
 <head>
@@ -80,6 +84,11 @@
         #partnerships table td:last-child {
             width: 120px;
         }
+
+        
+       
+ 
+   
     </style>
 </head>
 <body>
@@ -104,19 +113,20 @@
             <table class="table">
                 <thead>
                     <tr>
-                      @*  <th>Partner ID</th>*@
+                        <th class="d-none">Partner ID</th>
                         <th>Partner Name</th>
                         <th>AS2 ID</th>
                         <th>X509 Alias</th>
                         <th>Email</th>
                         <th>Last CU Time</th>
+                        <th>op</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var partner in Model.Partners)
                     {
                         <tr>
-                            <td>@partner.Partner_ID</td>
+                            <td class="d-none">@partner.Partner_ID</td>
                             <td>@partner.PartnerName</td>
                             <td>@partner.AS2_ID</td>
                             <td>@partner.X509_Alias</td>
@@ -143,33 +153,36 @@
             <table class="table">
                 <thead>
                     <tr>
-                      @*  <th>ID</th>*@
+                        <th class="d-none">ID</th>
                         <th>Name</th>
                         <th>Sender</th>
                         <th>Receiver</th>
                         <th>Implementation<br />Flavour</th>
                         <th>Poller<br />Config</th>
                         <th>Last<br /> Update</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var partnership in Model.Partnerships)
                     {
                         <tr>
-                            @*<td>@partnership.partnershipID</td>*@
+                            <td class="d-none">@partnership.partnershipID</td>
                             <td>@partnership.name</td>
                             <td>@partnership.sender</td>
                             <td>@partnership.receiver</td>
                             <td>@partnership.implementation_flavour</td>
                             <td>@(partnership.pollerConfig == true ? "Yes" : "No")</td>
                             <td>@partnership.LastCU_Time</td>
-                        </tr>
-                        <tr>
                             <td>
                                 <!-- Add the links to edit and delete the partner -->
                                 @*<a class="table-link edit" href="/Partners/Edit/@partner.Partner_ID">Edit</a>*@
                                 <a class="table-link edit" href="@Url.Page("/Partnerships/Edit"     ,new {id = partnership.partnershipID })">Edit</a>
+                                <a class="table-link edit" href="@Url.Page("/Partnerships/Delete"     ,new {id = partnership.partnershipID })">Delete</a>
+
                             </td>
+                        
+                            
                         </tr>
                     }
                     <tr>
@@ -178,6 +191,7 @@
                         </td>
                     </tr>
                 </tbody>
+               
             </table>
         </div>
     </div>

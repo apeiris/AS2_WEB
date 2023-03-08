@@ -57,7 +57,8 @@ namespace AS2_WEB.Pages.Partnerships
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+           
+            return RedirectToPage("/Index", new { Fragment = "partnership" });
         }
     }
 }
