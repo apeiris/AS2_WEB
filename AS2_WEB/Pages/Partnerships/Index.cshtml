@@ -1,0 +1,69 @@
+﻿@page
+@model AS2_WEB.Pages.Partnerships.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="column-15">
+                @Html.DisplayNameFor(model => model.Partnership[0].implementation_flavour)
+            </th>
+            <th class="column-15">
+                @Html.DisplayNameFor(model => model.Partnership[0].name)
+            </th>
+            <th class="column-15">
+                @Html.DisplayNameFor(model => model.Partnership[0].sender)
+            </th>
+            <th class="column-15">
+                @Html.DisplayNameFor(model => model.Partnership[0].receiver)
+              </th>
+            <th class="column-15">
+                @Html.DisplayNameFor(model => model.Partnership[0].pollerConfig)
+            </th>
+            <th class="column-15">
+                @Html.DisplayNameFor(model => model.Partnership[0].LastCU_Time)
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Partnership)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.implementation_flavour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.receiver)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pollerConfig)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastCU_Time)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.partnershipID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.partnershipID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.partnershipID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

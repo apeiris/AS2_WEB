@@ -1,0 +1,109 @@
+﻿@page
+@model AS2_WEB.Pages.Partnerships.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<h4>Partnership</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Partnership.name" class="control-label"></label>
+                <input asp-for="Partnership.name" class="form-control" readonly />
+                <span asp-validation-for="Partnership.name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Partnership.sender" class="control-label"></label>
+                <select asp-for="Partnership.sender" asp-items="@(new SelectList(Model.partnerNames))" class="form-control" onchange="updateNameField();">
+                    <option value="">-- Select Sender --</option>
+                </select>
+                <span asp-validation-for="Partnership.sender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Partnership.receiver" class="control-label"></label>
+                <select asp-for="Partnership.receiver" asp-items="@(new SelectList(Model.partnerNames))" class="form-control" onchange="updateNameField();">
+                    <option value="">-- Select Receiver --</option>
+                </select>
+                <span asp-validation-for="Partnership.receiver" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Partnership.implementation_flavour" class="control-label"></label>
+                <select asp-for="Partnership.implementation_flavour" asp-items="@Model.ImplementationFlavours" class="form-control"></select>
+                <span asp-validation-for="Partnership.implementation_flavour" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Partnership.pollerConfig" class="control-label">Poller Config</label>
+                <div>
+                    <label class="radio-inline"><input type="radio" asp-for="Partnership.pollerConfig" value="true">Yes</label>
+                    <label class="radio-inline"><input type="radio" asp-for="Partnership.pollerConfig" value="false">No</label>
+                </div>
+                <span asp-validation-for="Partnership.pollerConfig" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Index#partnerships">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            document.getElementById("Partnership_sender").focus();
+        });
+
+        function updateNameField() {
+            var sender = document.getElementById("Partnership_sender").value;
+            var receiver = document.getElementById("Partnership_receiver").value;
+            var name = sender + "-to-" + receiver;
+            document.getElementById("Partnership_name").value = name;
+            validatePartnership();
+        }
+
+        function validatePartnership() {
+            var senderSelect = document.getElementById("Partnership_sender");
+            var receiverSelect = document.getElementById("Partnership_receiver");
+            var createBtn = document.querySelector("input[type='submit']");
+            var errorSpan = document.getElementById("partnership-error");
+
+            // Disable create button if either sender or receiver is blank
+            if (senderSelect.value === "" || receiverSelect.value === "") {
+                createBtn.disabled = true;
+                errorSpan.innerText = "";
+                return;
+            }
+
+            // Display error message if sender and receiver are the same
+            if (senderSelect.value === receiverSelect.value) {
+                createBtn.disabled = true;
+                errorSpan.innerText = "Sender and receiver cannot be the same.";
+            } else {
+                createBtn.disabled = false;
+                errorSpan.innerText = "";
+            }
+        }
+
+        var senderSelect = document.getElementById("Partnership_sender");
+        var receiverSelect = document.getElementById("Partnership_receiver");
+
+        senderSelect.addEventListener("change", updateNameField);
+        receiverSelect.addEventListener("change", updateNameField);
+        senderSelect.addEventListener("change", validatePartnership);
+        receiverSelect.addEventListener("change", validatePartnership);
+    </script>
+}
+

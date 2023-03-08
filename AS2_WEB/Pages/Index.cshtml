@@ -39,18 +39,55 @@
             background-color: #555;
             color: #eee;
         }
+
 </style>
 
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
+    <style>
+        /* Add the CSS here */
+        #partnerships table th:first-child,
+        #partnerships table td:first-child {
+            width: 140px;
+        }
 
+        #partnerships table th:nth-child(2),
+        #partnerships table td:nth-child(2) {
+            width: 140px;
+        }
+
+        #partnerships table th:nth-child(3),
+        #partnerships table td:nth-child(3) {
+            width: 140px;
+        }
+
+        #partnerships table th:nth-child(4),
+        #partnerships table td:nth-child(4) {
+            width: 120px;
+        }
+
+        #partnerships table th:nth-child(5),
+        #partnerships table td:nth-child(5) {
+            width: 120px;
+        }
+
+        #partnerships table th:nth-child(6),
+        #partnerships table td:nth-child(6) {
+            width: 120px;
+        }
+
+        #partnerships table th:last-child,
+        #partnerships table td:last-child {
+            width: 120px;
+        }
+    </style>
 </head>
 <body>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
 
-  </body>  
+</body>
 <div class="container mt-4">
     <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -67,7 +104,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Partner ID</th>
+                      @*  <th>Partner ID</th>*@
                         <th>Partner Name</th>
                         <th>AS2 ID</th>
                         <th>X509 Alias</th>
@@ -106,18 +143,20 @@
             <table class="table">
                 <thead>
                     <tr>
+                      @*  <th>ID</th>*@
                         <th>Name</th>
                         <th>Sender</th>
                         <th>Receiver</th>
-                        <th>Implementation Flavour</th>
-                        <th>Poller Config</th>
-                        <th>Last CU Time</th>
+                        <th>Implementation<br />Flavour</th>
+                        <th>Poller<br />Config</th>
+                        <th>Last<br /> Update</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var partnership in Model.Partnerships)
                     {
                         <tr>
+                            @*<td>@partnership.partnershipID</td>*@
                             <td>@partnership.name</td>
                             <td>@partnership.sender</td>
                             <td>@partnership.receiver</td>
@@ -125,10 +164,22 @@
                             <td>@(partnership.pollerConfig == true ? "Yes" : "No")</td>
                             <td>@partnership.LastCU_Time</td>
                         </tr>
+                        <tr>
+                            <td>
+                                <!-- Add the links to edit and delete the partner -->
+                                @*<a class="table-link edit" href="/Partners/Edit/@partner.Partner_ID">Edit</a>*@
+                                <a class="table-link edit" href="@Url.Page("/Partnerships/Edit"     ,new {id = partnership.partnershipID })">Edit</a>
+                            </td>
+                        </tr>
                     }
+                    <tr>
+                        <td colspan="7" class="text-left">
+                            <a href="/partnerships/create" class="btn btn-primary">Create New Partnership</a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    </div>
+</div>
 <script src="~/js/tabs.js"></script>

@@ -5,6 +5,8 @@ namespace AS2_WEB.Models
 {
     public class Partner
     {
+        internal string Title;
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Partner_ID { get; set; }
@@ -15,5 +17,6 @@ namespace AS2_WEB.Models
         [Column(TypeName = "datetime")]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastCU_Time { get; set; }
+        public string Key { get; internal set; }
     }
 }
