@@ -5,4 +5,4 @@ $env:buildNumber=$newBuildNumber
 Set-Content $buildNumberFile $newBuildNumber
 Write-Output $newBuildNumber
 Write-Output $env:buildnumber
-Write-Host $buildNumberFile -ForegroundColor red -BackgroundColor white
+Write-Host $buildNumberFile -ForegroundColor red -BackgroundColor yellow
