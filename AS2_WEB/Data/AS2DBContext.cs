@@ -7,7 +7,7 @@ namespace AS2_WEB.Data
 {
     public class AS2DBContext : DbContext
     {
-        private IConfiguration _config;
+      //  private IConfiguration _config;
         public DbSet<Partner> Partners { get; set; }
         public DbSet<Partnership> Partnerships { get; set; } = default!;
         public AS2DBContext(DbContextOptions<AS2DBContext> options) : base(options)

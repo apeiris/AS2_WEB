@@ -17,7 +17,6 @@ namespace AS2_WEB.Pages.Partnerships
     public class CreateModel : PageModel
     {
         private readonly AS2_WEB.Data.AS2DBContext _context;
-        private readonly IConfiguration _config;
         public CreateModel(AS2_WEB.Data.AS2DBContext context)
         {
             _context = context;
