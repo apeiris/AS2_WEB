@@ -1,4 +1,5 @@
 name: Version Bump
+
 on:
   push:
     branches:
@@ -7,35 +8,24 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Setup .NET
+      
+      - name: Set up .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: '6.0.100-preview.7.21379.14'
 
-      - name: Get version number
-        id: get-version
-        run: echo "::set-output name=version::$(dotnet --version)"
-
-      - name: Increment version number
-        id: increment-version
-        uses: dotnet/version@v2
-        with:
-          version: ${{ steps.get-version.outputs.version }}
-          part: build
-          variable: Version
-
-      - name: Update version number
-        run: sed -i "s/AssemblyVersion(\".*\")/AssemblyVersion(\"${{ env.Version }}\")/g" Properties/AssemblyInfo.cs
-
-      - name: Commit version number change
+      - name: Version Bump
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add Properties/AssemblyInfo.cs
-          git commit -m "Bump version to ${{ env.Version }}"
-          git push
+          $version = [System.Version](Get-Content -Path $env:GITHUB_WORKSPACE/AS2_WEB/Properties/AssemblyInfo.cs | Select-String -Pattern 'AssemblyFileVersion\("(\d+\.\d+\.\d+\.)(\d+)"\)' | ForEach-Object { $_.Matches.Groups[1].Value + ($_.Matches.Groups[2].Value -as [int] + 1) })
+          (Get-Content -Path $env:GITHUB_WORKSPACE/AS2_WEB/Properties/AssemblyInfo.cs) -replace 'AssemblyFileVersion\("(\d+\.\d+\.\d+\.)(\d+)"\)', ('AssemblyFileVersion("{0}")' -f $version) | Set-Content -Path $env:GITHUB_WORKSPACE/MyProject/Properties/AssemblyInfo.cs
+          
+      - name: Commit and push changes
+        run: |
+          git config user.name "Anthony Peiris"
+          git config user.email "mapeiris@hotmail.com"
+          git add .
+          git commit -m "Bump version number"
+          git push origin main
