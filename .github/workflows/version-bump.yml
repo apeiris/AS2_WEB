@@ -22,6 +22,8 @@ jobs:
         run: |
           $branch = "${{ github.ref }}"
           $version = $branch -replace 'refs/heads/(.+)', '$1' -replace '/', '.'
+          run:echo ${{ github.head_ref concurrency }}	
+
           dotnet build /p:Version=$version
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
