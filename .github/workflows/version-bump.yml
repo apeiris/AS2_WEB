@@ -22,11 +22,16 @@ jobs:
         run: |
           $branch = "${{ github.ref }}"
           $version = $branch -replace 'refs/heads/', '' -replace '([0-9]+)\.([0-9]+)\/(.+)', '$1.$2.$env:GITHUB_RUN_NUMBER'
-       
+ 
       - name: Commit and push changes
-        run: |
-          git config user.name "Anthony Peiris"
-          git config user.email "mapeiris@hotmail.com"
-          git add .
-          git commit -m "Bump version number"
-          git push origin master
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Bump version number"
+          commit_options: "--author='Github Actions <actions@github.com>'"
+          repository: "."
+          branch: ${{ github.head_ref }}
+          commit_user_name: ${{ github.actor }}
+          commit_user_email: ${{ github.actor }}@users.noreply.github.com
+          commit_gpg_sign: false
+          access_token: ${{ secrets.github_token }}
+

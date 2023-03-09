@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<implementations>
+	<flavour key="IBMSterling" title="IBM Sterling" >
+		<attribute name="Allow Restricted Headers" value="false" target="startup" action="add"/>
+		<attribute name="Prevent Canonicalization for MIC" value="" target="partner" action="add" />
+		<attribute name="Remove CMS Algorithm Protection" value="true" target="partner" action="add" />
+		<attribute name="" value=""/>
+	</flavour>
+	<flavour key="IBMDatapower" title="IBM Datapower">
+		<attribute name="Allow Restricted Headers" value="false" target="startup" action="add"/>
+		<attribute name="Prevent Canonicalization for MIC" value="" target="partner" action="add" />
+		<attribute name="Remove CMS Algorithm Protection" value="true" target="partner" action="add"/>
+	</flavour>
+	<flavour key="Mendelson" title="Mendelson">
+		<attribute name="Allow Restricted Headers" value="false" target="startup" action="add"/>
+		<attribute name="Prevent Canonicalization for MIC" value="true" target="partner" action="add" />
+		<attribute name="Remove CMS Algorithm Protection" value="" target="partner" action="add" />
+	</flavour>
+	<flavour key="Seeburger" title="Seeberger (Old versions)">
+		<attribute name="Allow Restricted Headers" value="false" target="startup" action="add" />
+		<attribute name="Prevent Canonicalization for MIC" value="true" target="partner" action="add" />
+		<attribute name="Remove CMS Algorithm Protection" value="" target="partner" action="add"/>
+		<attribute name="rename_digest_to_old_name" value="true" target="partner" action="add"/>
+	</flavour>
+	<flavour key="OracleB2B" title="Oracle B2B" >
+		<attribute name="Allow Restricted Headers" value="false" target="startup"  action="add"/>
+		<attribute name="Prevent Canonicalization for MIC" value="false" target="partner" action="add"/>
+		<attribute name="Remove CMS Algorithm Protection" value="false" target="partner" action="add"/>
+	</flavour>
+	<flavour key="Amazon" title="Amazon" >
+		<attribute name="Allow Restricted Headers" value="false" target="startup"  action="add"/>
+		<attribute name="Prevent Canonicalization for MIC" value="tru" target="partner" action="add"/>
+		<attribute name="Remove CMS Algorithm Protection" value="false" target="partner" action="add"/>
+		<attribute name="compression_type" value="" target="partner" action="remove"/>
+	</flavour>
+</implementations>
