@@ -15,14 +15,14 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '.NET 7.0' 
+          dotnet-version: '.NET 7.0.x' 
       - name: display branch name
         run: echo ${{ github.ref_name }}
       - name: Version Bump
         run: |
           $branch = "${{ github.ref }}"
           $version = $branch -replace 'refs/heads/', '' -replace '([0-9]+)\.([0-9]+)\/(.+)', '$1.$2.$env:GITHUB_RUN_NUMBER'
-          dotnet build /p:Version=$version	
+          dotnet build /p:Version=$version
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
