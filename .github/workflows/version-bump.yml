@@ -15,7 +15,7 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '.NET 7.0.x' 
+          dotnet-version: '7.0.x' 
       - name: display branch name
         run: echo ${{ github.ref_name }}
       - name: Version Bump
