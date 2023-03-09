@@ -1,9 +1,16 @@
-$buildNumberFile = Join-Path $PSScriptRoot "buildnumber.txt"
-Write-Host $buildNumberFile -ForegroundColor red -BackgroundColor green
-$buildNumber = Get-Content $buildNumberFile
+# Get the latest tag and extract the build number
+$latestTag = git describe --tags --abbrev=0
+Write-Output "Latest tag: $latestTag"
+
+$buildNumber = $latestTag.Split('.')[3]
+Write-Output "Current build number: $buildNumber"
+
+# Increment the build number and update the Git tag
 $newBuildNumber = [int]$buildNumber + 1
-$env:buildNumber=$newBuildNumber
-Set-Content $buildNumberFile $newBuildNumber
-Write-Output $newBuildNumber
-Write-Output $env:buildnumber
-Write-Host $buildNumberFile -ForegroundColor red -BackgroundColor yellow
+Write-Output "New build number: $newBuildNumber"
+
+$newTag = "$major.$minor.$patch.$newBuildNumber"
+Write-Output "New tag: $newTag"
+
+git tag -f $newTag
+git push --tags
