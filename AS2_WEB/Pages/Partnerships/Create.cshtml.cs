@@ -21,7 +21,6 @@ namespace AS2_WEB.Pages.Partnerships
         public CreateModel(AS2_WEB.Data.AS2DBContext context)
         {
             _context = context;
-      
         }
 
         public List<string> partnerNames { get; set; }
@@ -33,30 +32,26 @@ namespace AS2_WEB.Pages.Partnerships
             try
             {
                 await connection.OpenAsync();
-
                 var command = new SqlCommand("select * from dbo.ftImplementationFlavours()", connection);
                 var reader = await command.ExecuteReaderAsync();
-
                 while (await reader.ReadAsync())
                 {
                     var key = reader.GetString(0);
                     var title = reader.GetString(1);
-                    flavours.Add(new SelectListItem {Value=key,Text=title });
+                    flavours.Add(new SelectListItem { Value = key, Text = title });
                 }
-
                 reader.Close();
             }
             finally
             {
                 await connection.CloseAsync();
             }
-
             ImplementationFlavours = flavours;
 
 
 
-            partnerNames =await _context.Partners.Select(n=>n.PartnerName).ToListAsync();
-         /// <summary>
+            partnerNames = await _context.Partners.Select(n => n.PartnerName).ToListAsync();
+            /// <summary>
             /// This is an action method in an ASP.NET Core MVC controller.
             /// It is called when an HTTP GET request is made to the controller. 
             /// It is responsible for returning an IActionResult, 
@@ -66,13 +61,13 @@ namespace AS2_WEB.Pages.Partnerships
             /// <returns></returns>
             return Page();
         }
- 
+
         [BindProperty]
         public Partnership Partnership { get; set; } = default!;
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)    return Page();
-            if (_context.Partnerships == null || Partnership == null)return Page();
+            if (!ModelState.IsValid) return Page();
+            if (_context.Partnerships == null || Partnership == null) return Page();
             _context.Partnerships.Add(Partnership);
             await _context.SaveChangesAsync();
             return RedirectToPage("/Index");

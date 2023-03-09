@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AS2_WEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AS2_WEB.Data;
-using AS2_WEB.Models;
 using Microsoft.Data.SqlClient;
-using Microsoft.CodeAnalysis.Elfie.Extensions;
-
+using Microsoft.EntityFrameworkCore;
 namespace AS2_WEB.Pages.Partnerships
 {
     public class EditModel : PageModel

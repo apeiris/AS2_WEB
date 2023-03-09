@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using AS2_WEB.Models;
+﻿using AS2_WEB.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
-using Microsoft.Extensions.Configuration;
 
 namespace AS2_WEB.Data
 {
@@ -24,16 +19,15 @@ namespace AS2_WEB.Data
             {
 
                 // optionsBuilder.UseSqlServer("Server=192.168.86.31,1434;Database=AS2;User Id=sa;Password=Ap@22051954;TrustServerCertificate=true;");
-        
-//This line of code is using the Entity Framework Core's OptionsBuilder to configure a connection to a SQL Server database using the connection string stored in the configuration file. The connection string is identified by the key "AS2_WEBContext
-        optionsBuilder.UseSqlServer(_config.GetConnectionString("AS2_WEBContext"));
+
+                //This line of code is using the Entity Framework Core's OptionsBuilder to configure a connection to a SQL Server database using the connection string stored in the configuration file. The connection string is identified by the key "AS2_WEBContext
+                optionsBuilder.UseSqlServer(_config.GetConnectionString("AS2_WEBContext"));
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-      //      This statement is used to configure the Entity Framework model.It sets the name of the property "Partner_ID" to "Partner_ID" in the database. This allows the Entity Framework to map the property to the correct column in the database.
-     modelBuilder.Entity<Partner>().Property(c => c.Partner_ID).HasColumnName("Partner_ID");
+            //      This statement is used to configure the Entity Framework model.It sets the name of the property "Partner_ID" to "Partner_ID" in the database. This allows the Entity Framework to map the property to the correct column in the database.
+            modelBuilder.Entity<Partner>().Property(c => c.Partner_ID).HasColumnName("Partner_ID");
             modelBuilder.Entity<Partner>().Property(c => c.PartnerName).HasColumnName("PartnerName");
         }
         /// <summary>
@@ -106,6 +100,6 @@ namespace AS2_WEB.Data
             return partnerships;
         }
 
-       
+
     }
 }
