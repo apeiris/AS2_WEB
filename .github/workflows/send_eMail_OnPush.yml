@@ -20,4 +20,4 @@ jobs:
                -- url https://api.sendgrid.com/v3/mail/send \
                -- header "Authorization: Bearer $SENDGRID_API_KEY" \
                -- header "Content-Type: application/json" \
-               -- data '{"personalizations":[{"to":[{"email":"mapeiris@example.com"}]}],"from":{"email":"mapeiris@gmail.com"},"subject":"Test email","content":[{"type":"text/plain","value":"This is a test email."}]}'
+               -- data '{"personalizations":[{"to":[{"email":"mapeiris@hotmail.com"}]}],"from":{"email":"mapeiris@gmail.com"},"subject":"Test email","content":[{"type":"text/plain","value":"This is a test email."}]}'
