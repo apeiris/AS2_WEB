@@ -20,8 +20,9 @@ jobs:
         run: echo ${{ github.ref_name }}
       - name: Version Bump
         run: |
-         $version = [System.Version]::Parse("${{ github.ref_name }}/0")
-          dotnet build /p:Version=$version    
+          $branch = "${{ github.ref }}"
+          $version = $branch -replace 'refs/heads/', '' -replace '([0-9]+)\.([0-9]+)\/(.+)', '$1.$2.$env:GITHUB_RUN_NUMBER'
+       
       - name: Commit and push changes
         run: |
           git config user.name "Anthony Peiris"
