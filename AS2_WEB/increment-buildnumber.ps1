@@ -1,5 +1,5 @@
 $buildNumberFile = Join-Path $PSScriptRoot "buildnumber.txt"
-Write-Host $buildNumberFile -ForegroundColor red -BackgroundColor yellow
+Write-Host $buildNumberFile -ForegroundColor red -BackgroundColor green
 $buildNumber = Get-Content $buildNumberFile
 $newBuildNumber = [int]$buildNumber + 1
 $env:buildNumber=$newBuildNumber
