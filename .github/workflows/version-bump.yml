@@ -21,7 +21,7 @@ jobs:
       - name: Version Bump
         run: |
           $branch = "${{ github.ref }}"
-          $version = $branch -replace 'refs/heads/', '' -replace '([0-9]+)\.([0-9]+)\/(.+)', '$1.$2.$env:GITHUB_RUN_NUMBER'
+          $version = $branch -replace 'refs/heads/(.+)', '$1' -replace '/', '.'
           dotnet build /p:Version=$version
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
