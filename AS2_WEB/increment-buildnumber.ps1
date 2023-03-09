@@ -16,5 +16,5 @@ Write-Output "New build number: $newBuildNumber"
 $newTag = "$major.$minor.$patch.$newBuildNumber"
 Write-Output "New tag: $newTag"
 
-git tag -f $newTag
-git push --tags
+#git tag -f $newTag
+#git push --tags

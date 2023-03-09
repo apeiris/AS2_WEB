@@ -28,7 +28,7 @@
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
 	</Target>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="powershell.exe -File &quot;$(ProjectDir)increment-buildnumber.ps1&quot;"/>
+		<Exec Command="powershell.exe -File &quot;$(ProjectDir)increment-buildnumber.ps1&quot;&#xA;&#xD;"/>
 		
 	</Target>
 </Project>
