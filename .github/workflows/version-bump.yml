@@ -19,9 +19,8 @@ jobs:
 
       - name: Version Bump
         run: |
-          $version = [System.Version](Get-Content -Path $env:GITHUB_WORKSPACE/AS2_WEB/Properties/AssemblyInfo.cs | Select-String -Pattern 'AssemblyFileVersion\("(\d+\.\d+\.\d+\.)(\d+)"\)' | ForEach-Object { $_.Matches.Groups[1].Value + ($_.Matches.Groups[2].Value -as [int] + 1) })
-          (Get-Content -Path $env:GITHUB_WORKSPACE/AS2_WEB/Properties/AssemblyInfo.cs) -replace 'AssemblyFileVersion\("(\d+\.\d+\.\d+\.)(\d+)"\)', ('AssemblyFileVersion("{0}")' -f $version) | Set-Content -Path $env:GITHUB_WORKSPACE/MyProject/Properties/AssemblyInfo.cs
-          
+         $version = [System.Version]::Parse("${{ github.ref_name }}/0")
+          dotnet build /p:Version=$version    
       - name: Commit and push changes
         run: |
           git config user.name "Anthony Peiris"
