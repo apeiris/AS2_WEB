@@ -17,7 +17,7 @@ jobs:
         with:
           dotnet-version: '7.0.x' 
       - name: display branch name
-        run: echo ${{ github.ref_name }}
+        run: echo ${{ github.ref }}
       - name: Version Bump
         run: |
           $branch = "${{ github.ref }}"
