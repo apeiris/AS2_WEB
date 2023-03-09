@@ -26,8 +26,9 @@
 		</PropertyGroup>
 	</Target>
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-</Target>
+	</Target>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="set BuildNumber=$(PowerShell -NoProfile -ExecutionPolicy Bypass -File &quot;$(ProjectDir)increment-buildnumber.ps1&quot;)&#xA;&#xD;" />
+		<Exec Command="powershell.exe -ExecutionPolicy Bypass -File &quot;$(ProjectDir)increment-buildnumber.ps1&quot;"/>
+		
 	</Target>
 </Project>
