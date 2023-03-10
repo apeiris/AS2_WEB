@@ -2,6 +2,10 @@ using AS2_WEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
+using SendGrid.Helpers.Mail;
+using SendGrid;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System;
 
 namespace AS2_WEB.Pages
 {
@@ -53,6 +57,60 @@ namespace AS2_WEB.Pages
                     }
                 }
             }
+        }
+
+
+        public async Task<IActionResult> OnPostAsync(string name, string name2)
+        {
+            // handle the post request data
+
+
+            return new JsonResult("Email Sent");
+        }
+
+       
+        public void SendsssEmail()
+        {
+        }
+
+        public IActionResult OnPost(string methodName)
+        {
+            switch (methodName)
+            {
+                case "MyMethod":
+                    // do something
+                    break;
+                case "AnotherMethod":
+                    // do something else
+                    break;
+                default:
+                    break;
+            }
+
+            return Page();
+        }
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostSendEmailAsync()
+        {
+            // send email code here
+            var apiKey = "YOUR_API_KEY";
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("test@example.com", "Example User");
+            var subject = "Sending with SendGrid is Fun";
+            var to = new EmailAddress("test@example.com", "Example User");
+            var plainTextContent = "and easy to do anywhere, even with C#";
+            var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);
+
+            return RedirectToPage("./Index");
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult OnSendEmail(string emailTo, string emailSubject, string emailBody)
+        {
+            // Send email code here
+            return Page();
         }
     }
 }

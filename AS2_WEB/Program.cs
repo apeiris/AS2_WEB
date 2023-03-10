@@ -13,6 +13,8 @@ namespace AS2_WEB
             // Add services to the container.
             builder.Services.AddRazorPages();
 
+            builder.Services.AddLogging( l => { l.ClearProviders(); l.AddConsole(); });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

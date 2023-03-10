@@ -42,7 +42,7 @@ namespace AS2_WEB.Pages.Partners
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? id, string? x)
         {
             if (id == null || _context.Partners == null)
             {

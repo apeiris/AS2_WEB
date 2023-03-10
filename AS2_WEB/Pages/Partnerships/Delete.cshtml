@@ -49,10 +49,20 @@
             @Html.DisplayFor(model => model.Partnership.LastCU_Time)
         </dd>
     </dl>
-    
+    @* abandoning use of form methon in favour of @using(Html.BeginForm()
     <form method="post">
-        <input type="hidden" asp-for="Partnership.partnershipID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
+    <!-- <input type="hidden" asp-for="Partnership.partnershipID" /> -->
+    <input type="submit" name="action" value="Delete" class="btn btn-dark" /> |
+    <a asp-page="/Index">Back to List</a>
+    </form>*@
+    @Html.AntiForgeryToken()
+    @using (Html.BeginForm(actionName: "Delete", controllerName: "Partnerships", routeValues: new { id = Model.Partnership.partnershipID, name = Model.Partnership.name, sender = Model.Partnership.sender, receiver = Model.Partnership.receiver, implementation_flavour = Model.Partnership.implementation_flavour }, FormMethod.Post))
+    {
+        
+        <span>
+            <button type="submit" name="action" value="Delete" class="btn btn-dark">Delete</button>
+            <button type="submit" name="action" value="delete_SendMail" class="btn btn-danger">Delete and Send Email</button>
+        </span>
+    }
+    
 </div>
