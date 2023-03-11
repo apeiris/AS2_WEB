@@ -82,6 +82,7 @@ namespace AS2_WEB.Pages.Partnerships
                        // HSendMail
                     case "hsendmail":// send using Hotmail
                                      //  var smtpHost = "smtp.live.com";
+                        log.LogTrace("sending email via hotmail");
                         var smtpHost = "localhost";
                         var smtpPort = 465;
                         var smtpUsername = "mapeiris@hotmail.com";

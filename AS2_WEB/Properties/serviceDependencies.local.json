@@ -5,8 +5,10 @@
       "connectionId": "ConnectionStrings:AS2_WEBContext"
     },
     "secrets1": {
+      "secretStore": null,
+      "resourceId": null,
       "type": "secrets.user",
-      "dynamicId": null
+      "connectionId": null
     }
   }
 }
