@@ -7,13 +7,19 @@ namespace AS2_WEB
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Configuration.AddUserSecrets<Program>();
+
+
             builder.Services.AddDbContext<AS2DBContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("AS2_WEBContext") ?? throw new InvalidOperationException("Connection string 'AS2_WEBContext' not found.")));
+                options.UseSqlServer(builder.Configuration["AS2_WEBContext"] ?? throw new InvalidOperationException("Connection string 'AS2_WEBContext' not found.")));
            
             // Add services to the container.
             builder.Services.AddRazorPages();
 
-            builder.Services.AddLogging( l => { l.ClearProviders(); l.AddConsole(); });
+            builder.Services.AddLogging( l => { l.ClearProviders();
+                l.AddProvider(new ColoredConsoleLoggerProvider());
+                 });
 
             var app = builder.Build();
 
